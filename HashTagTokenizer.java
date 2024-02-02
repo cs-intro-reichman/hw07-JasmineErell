@@ -7,6 +7,7 @@ public class HashTagTokenizer {
 		String hashTag = args[0];
 		String []dictionary = readDictionary("dictionary.txt");
 		breakHashTag(hashTag, dictionary);
+		// System.out.println(existInDictionary(hashTag, dictionary));
 	}
 
 	public static String[] readDictionary(String fileName) {
@@ -14,27 +15,49 @@ public class HashTagTokenizer {
 
 		In in = new In(fileName);
 
-		// Your code here
+		for (int i = 0; i<dictionary.length; i++)
+		{
+			dictionary[i] = in.readLine();
+		}
 
 		return dictionary;
 	}
 
-	public static boolean existInDictionary(String word, String []dictionary) {
-		// Your code here
+	public static boolean existInDictionary(String word, String []dictionary) 
+	{
+		boolean flag = false;
+		for(int i = 0; i<dictionary.length; i++)
+		{
+			if (dictionary[i].equals(word))
+			{
+				flag = true;
+				break;
+			}
+		}
+		return flag;
 	}
 
 	public static void breakHashTag(String hashtag, String[] dictionary) {
 
 		// Base case: do nothing (return) if hashtag is an empty string.
-        if (hashtag.isEmpty()) {
-            return;
+        if (hashtag.isEmpty())
+		{
+            System.out.println("no words to hashtag");
         }
- 
+		int beginIndex = 0;
         int N = hashtag.length();
+        for (int i = 1; i <= N; i++) 
+		{
+			String prefix = hashtag.substring(beginIndex, i);
+			if (existInDictionary(prefix, dictionary)) 
+			{
+				System.out.println(prefix);
+				beginIndex = i;
 
-        for (int i = 1; i <= N; i++) {
-		
+			}
+			
         }
+		
     }
 
 }
