@@ -66,22 +66,34 @@ public class SpellChecker {
 
 	public static String spellChecker(String word, int threshold, String[] dictionary) 
 	{
-		for (int i = 1; i<dictionary.length; i++)
+		boolean exist = false;
+		for (int i =0; i<dictionary.length; i++)
 		{
-			int min = levenshtein(word, dictionary[0]);
-			if (levenshtein(word, dictionary[i])< min)
+			if (dictionary[i].equals(word)) 
 			{
-				min = levenshtein(word, dictionary[i]);
-			}
-			if (min<=threshold) 
-			{
-				word = dictionary[i];
-				break;
+				exist = true;	
 			}
 		}
-		
+		if (!exist)
+		{
+			for (int i = 1; i<dictionary.length; i++)
+			{
+				int min = levenshtein(word, dictionary[0]);
+				if (levenshtein(word, dictionary[i])< min)
+				{
+					min = levenshtein(word, dictionary[i]);
+				}
+				if (min<=threshold) 
+				{
+					word = dictionary[i];
+					break;
+				}
+			}
+		}
 		return word;
 	}
+		
+	
 
 	public static String lowerCase(String s) 
     {
