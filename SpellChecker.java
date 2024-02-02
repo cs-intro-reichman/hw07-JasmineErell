@@ -73,7 +73,7 @@ public class SpellChecker {
 			{
 				min = levenshtein(word, dictionary[i]);
 			}
-			if (min<threshold) 
+			if (min<=threshold) 
 			{
 				word = dictionary[i];
 				break;
